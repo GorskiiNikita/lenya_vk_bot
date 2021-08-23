@@ -1,0 +1,53 @@
+version: '3.3'
+
+services:
+  mongodb:
+    image: mongo
+    restart: always
+    volumes:
+      - mongodata:/data/db
+      - ./init_mongo.sh:/docker-entrypoint-initdb.d/1-init.sh
+      - ./botdb:/botdbdump
+  redis:
+    image: "redis:alpine"
+  vk_schedule_bot:
+    build:
+      context: ./vk_schedule_bot
+      dockerfile: Dockerfile
+    command: python3 vk_main.py
+    restart: always
+    depends_on:
+      - mongodb
+  adminvkbot:
+    build:
+      context: ./adminvkbot
+      dockerfile: Dockerfile
+    command: gunicorn --bind 0.0.0.0:5000 manage:app
+    expose:
+      - 5000
+    depends_on:
+      - mongodb
+  nginx:
+    build: ./nginx
+    ports:
+      - "80:80"
+    depends_on:
+      - mongodb
+      - adminvkbot
+
+  celery_beat:
+    build: ./adminvkbot
+    command: celery -A tasks beat --loglevel=INFO
+    depends_on:
+      - redis
+      - adminvkbot
+  celery_worker:
+    build: ./adminvkbot
+    command: celery -A tasks worker --loglevel=INFO
+    depends_on:
+      - redis
+      - adminvkbot
+
+
+volumes:
+  mongodata:

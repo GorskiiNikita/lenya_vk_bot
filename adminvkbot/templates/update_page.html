@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Изменить группу</title>
+    <style>
+        .div-table {
+            border-bottom: 2px solid black;
+        }
+
+        table {
+            border-spacing: 0;
+        }
+        td {
+            padding-left: 10px;
+        }
+
+        .space {
+            height: 15px;
+        }
+
+        .save {
+            margin: 30px 0 50px 300px;
+        }
+
+        .to-main {
+            text-decoration: none;
+            padding: 10px 20px;
+            border: 1px solid grey;
+            margin-bottom: 50px;
+            background-color: lightblue;
+        }
+
+        .to-main:hover{
+            background-color: aliceblue;
+        }
+        form {
+            margin-top: 50px;
+        }
+    </style>
+</head>
+<body>
+<a href="../" class="to-main">На главную</a>
+<form action="" method="post">
+    <h3>Номер группы: {{ group_id }}</h3>
+    {% for weekday in weekdays %}
+    <div class="div-table">
+        <h4>{{ weekday[1] }}</h4>
+        <table>
+            {% for lesson in lessons %}
+            <tr>
+                <td>{{ lesson[1] }}</td>
+                <td>Числитель:</td>
+                <td><input type="text" name="{{ weekday[0] }}_{{ lesson[0] }}_numerator"
+                value="{{ data[weekday[0]+'_'+lesson[0] +'_numerator'] }}"></td>
+                <td>Аудитория:</td>
+                <td><input type="text" name="{{ weekday[0] }}_{{ lesson[0] }}_wherenumerator"
+                value="{{ data[weekday[0]+'_'+lesson[0] +'_wherenumerator'] }}"></td>
+                <td>Преподаватель:</td>
+                <td><input type="text" name="{{ weekday[0] }}_{{ lesson[0] }}_teachernumerator"
+                value="{{ data[weekday[0]+'_'+lesson[0] +'_teachernumerator'] }}"></td>
+            </tr>
+            <tr class="bottom">
+                <td></td>
+                <td>Знаменатель:</td>
+                <td><input type="text" name="{{ weekday[0] }}_{{ lesson[0] }}_denumerator"
+                value="{{ data[weekday[0]+'_'+lesson[0] +'_denumerator'] }}"></td>
+                <td>Аудитория:</td>
+                <td><input type="text" name="{{ weekday[0] }}_{{ lesson[0] }}_wheredenumerator"
+                value="{{ data[weekday[0]+'_'+lesson[0] +'_wheredenumerator'] }}"></td>
+                <td>Преподаватель:</td>
+                <td><input type="text" name="{{ weekday[0] }}_{{ lesson[0] }}_teacherdenumerator"
+                value="{{ data[weekday[0]+'_'+lesson[0] +'_teacherdenumerator'] }}"></td>
+            </tr>
+            <tr>
+                <td class="space"></td>
+                <td class="space"></td>
+                <td class="space"></td>
+                <td class="space"></td>
+                <td class="space"></td>
+            </tr>
+            <tr>
+                <td class="space"></td>
+                <td class="space"></td>
+                <td class="space"></td>
+                <td class="space"></td>
+                <td class="space"></td>
+            </tr>
+            {% endfor %}
+        </table>
+    </div>
+    {% endfor %}
+    <button type="submit" class="save">Сохранить!</button>
+</form>
+</body>
+</html>

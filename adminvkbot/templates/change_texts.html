@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>VkBot Admin Panel</title>
+    <style>
+        .save {
+            margin: 30px 0 50px 300px;
+        }
+        .to-main {
+            text-decoration: none;
+            padding: 10px 20px;
+            border: 1px solid grey;
+            background-color: lightblue;
+        }
+
+        .to-main:hover{
+            background-color: aliceblue;
+        }
+
+        form {
+            margin-top: 30px;
+        }
+
+    </style>
+</head>
+<body>
+<a href="./" class="to-main">На главную</a>
+<form action="" method="post">
+<table>
+{% for text in texts %}
+    <tr>
+        <td><label for={{ text['_id'] }}>{{ text['description'] }}:</label></td>
+        <td><textarea cols="30" rows="3" name="{{ text['_id'] }}" required id="{{ text['_id'] }}">{{ text['text'] }}</textarea></td>
+    </tr>
+{% endfor %}
+</table>
+<button type="submit" class="save">Сохранить!</button>
+</form>
+</body>
+</html>
