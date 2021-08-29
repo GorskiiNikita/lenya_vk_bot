@@ -2,6 +2,7 @@ import datetime
 import threading
 import time
 import os
+import sys
 
 import vk_api
 from vk_api.bot_longpoll import VkBotEventType
@@ -9,7 +10,7 @@ from vk_api.utils import get_random_id
 
 from commands_bot import where_is, what_is_today, what_is_tomorrow, when_to_study
 from db_client import ClientMongoDb
-from settings import VK_TOKEN, VK_GROUP_ID, VK_ADMIN_ID
+from settings import VK_TOKEN, VK_GROUP_ID, PATH_TO_LOG_FILE, VK_ADMIN_ID
 from utils import create_custom_keyboard
 from vk_long_poll import MyVkBotLongPoll
 
@@ -180,4 +181,7 @@ def main():
 
 if __name__ == '__main__':
     here = os.path.dirname(os.path.abspath(__file__))
+    err = open(PATH_TO_LOG_FILE, 'a+')
+    sys.stderr = err
+    sys.stdout = err
     main()

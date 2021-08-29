@@ -10,13 +10,15 @@ WEEKDAYS = [('1', 'Понедельник'),
             ('6', 'Суббота')]
 
 REVERSE_WEEKDAYS = ['monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday']
-LESSONS = ['first', 'second', 'third', 'fourth', 'fifth']
+LESSONS = ['first', 'second', 'third', 'fourth', 'fifth', 'sixth', 'seventh']
 
-LESSONS_TIME = (('1',  '9:00 - 10:30'),
-                ('2',  '10:45 - 12:15'),
-                ('3',  '12:30 - 14:00'),
-                ('4',  '15:00 - 16:30'),
-                ('5',  '16:45 - 18:15'))
+LESSONS_TIME = (('1', '9:00 - 10:30'),
+                ('2', '10:45 - 12:15'),
+                ('3', '12:55 - 14:25'),
+                ('4', '14:40 - 16:10'),
+                ('5', '16:25 - 17:55'),
+                ('6', '18:00 - 19:30'),
+                ('7', '19:40 - 21:10'))
 
 
 def update_group(key):
@@ -26,7 +28,7 @@ def update_group(key):
         group_data = mongo_client.get_group(key)
         resp = {}
         for i in range(6):
-            for j in range(5):
+            for j in range(7):
                 if group_data[REVERSE_WEEKDAYS[i]][LESSONS[j]] is None:
                     resp[f'{i+1}_{j+1}_numerator'] = ''
                     resp[f'{i + 1}_{j + 1}_denumerator'] = ''
@@ -65,41 +67,55 @@ def update_group(key):
                  'third': None,
                  'fourth': None,
                  'fifth': None,
+                 'sixth': None,
+                 'seventh': None
              },
              'tuesday': {
                  'first': None,
                  'second': None,
                  'third': None,
                  'fourth': None,
-                 'fifth': None
+                 'fifth': None,
+                 'sixth': None,
+                 'seventh': None
              },
              'wednesday': {
                  'first': None,
                  'second': None,
                  'third': None,
                  'fourth': None,
-                 'fifth': None
+                 'fifth': None,
+                 'sixth': None,
+                 'seventh': None
              },
              'thursday': {
                  'first': None,
                  'second': None,
                  'third': None,
                  'fourth': None,
-                 'fifth': None
+                 'fifth': None,
+                 'sixth': None,
+                 'seventh': None
              },
              'friday': {
                  'first': None,
                  'second': None,
                  'third': None,
                  'fourth': None,
-                 'fifth': None
+                 'fifth': None,
+                 'sixth': None,
+                 'seventh': None
              },
              'saturday': {
                  'first': None,
                  'second': None,
                  'third': None,
                  'fourth': None,
-                 'fifth': None}}
+                 'fifth': None,
+                 'sixth': None,
+                 'seventh': None
+             }
+    }
 
     for i in range(0, 6):
         for j in range(0, 5):

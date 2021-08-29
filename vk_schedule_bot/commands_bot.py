@@ -53,9 +53,11 @@ def what_is_today(group, date, mongo_client, holidays):
     resp = []
     lessons_time = {'first': '9:00 - 10:30',
                     'second': '10:45 - 12:15',
-                    'third': '12:30 - 14:00',
-                    'fourth': '15:00 - 16:30',
-                    'fifth': '16:45 - 18:15'}
+                    'third': '12:55 - 14:25',
+                    'fourth': '14:40 - 16:10',
+                    'fifth': '16:25 - 17:55',
+                    'sixth': '18:00 - 19:30',
+                    'seventh': '19:40 - 21:10'}
     now = date
     if now.isoweekday() in range(1, 7) and not today_is_holiday(now, holidays):
         schedule = mongo_client.get_schedule(group, now)

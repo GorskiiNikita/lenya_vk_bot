@@ -1,12 +1,11 @@
 from pymongo import MongoClient
 
 from storage import DAYS_OF_WEEK
-from settings import MONGO_CONFIG
 
 
 class ClientMongoDb:
     def __init__(self):
-        self.client = MongoClient(MONGO_CONFIG['HOST'])
+        self.client = MongoClient()
         self.db = self.client.botdb
 
     def get_group(self, user_id):
