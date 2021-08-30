@@ -1,7 +1,7 @@
 from pymongo import MongoClient
 
 from storage import DAYS_OF_WEEK
-from vk_schedule_bot.settings import MONGO_CONFIG
+from .settings import MONGO_CONFIG
 
 
 class ClientMongoDb:
