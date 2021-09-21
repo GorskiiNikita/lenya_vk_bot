@@ -24,7 +24,7 @@ class ClientMongoDb:
             elif len(schedule[lesson]) == 1:
                 schedule[lesson] = schedule[lesson][0]
             elif len(schedule[lesson]) == 2:
-                schedule[lesson] = schedule[lesson][date.isocalendar()[1] % 2]
+                schedule[lesson] = schedule[lesson][(date.isocalendar()[1] - 1) % 2]
         return schedule
 
     def init_user(self, user_id):
